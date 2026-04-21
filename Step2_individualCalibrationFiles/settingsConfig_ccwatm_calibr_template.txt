@@ -1,0 +1,58 @@
+[DEFAULT]
+Root = /work/ch0636/projects/uwares/CCWatM_calibration
+RootPC =/work/ch0636/projects/uwares/CCWatM_calibration
+Rootbasin = CCWatM_calibration_Europe_Okt2025
+
+# start date of simulation outputs
+ForcingStart = 1/1/1989
+ForcingEnd = 31/12/1998
+timeperiod = daily
+
+[ObservedData]
+#Qtss = observed_data/Danube_Budapest_France_discharge_2000_2002.csv
+#Qgis = observed_data/Qgis_otta.csv
+Qtss_nc = %GRDC_file
+region_id = %grdc_id
+# None if europe scale
+
+[Path]
+Main = Step2_individualCalibrationFiles
+Templates = Step2_individualCalibrationFiles/settingsFiles
+SubCatchmentPath = Step2_individualCalibrationFiles/outputFiles/%grdc_id
+ParamRanges = %calibration_parameters_range
+#changer path 
+
+[Templates]
+ModelSettings = settings_ccwatm_calibr_%grdc_id.ini
+RunModel = %run_model
+
+
+[Option]
+# Sets initial parameter values according to the para_first array
+firstrun = False
+
+# Standard calibation parameter set
+# SnowMelt, crop KC, soil depth, pref. flow, arno beta, aplhaDepl, interflow factor, groundwater recession, runoff, routing, normalStorageLimit, lakeAFactor, lakeEvaFactor, No of run
+para_first = %calibration_parameters_firstRun
+
+# the model runs with the best parameter set after the calibration
+bestrun = True
+
+
+[DEAP]
+maximize = True
+
+# if more than one node is to be used for parallel processing 
+use_multiprocessing = 1
+
+# Number of nodes used for multiprocessing, recommended 1-8
+pool_limit =16
+
+# Number of generations, recommended 10-40
+ngen = 40
+
+# Initial population, recommended 16-128
+mu = 100
+
+# Runs per generation, recommended 8-16
+lambda_ = 16

@@ -1,0 +1,9 @@
+ParameterName,MinValue,MaxValue
+arnoB,0.01,1
+alphaDepl,0.5,1.0
+reces,0.1,10
+CCM,0.1,10
+normalStorageLimit,0.15,0.85
+lakeAFactor,0.33,3.0
+lakeEvaFactor,0.5,3.0
+No,1,100
