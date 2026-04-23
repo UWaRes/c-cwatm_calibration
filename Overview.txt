@@ -1,16 +1,18 @@
+C-CWatM Calibration & Regionalisation Workflow
+--------------------------------------------
 
-README
-======
+Data preparation:
+- in situ measurements for calibration; here GRDC discharge in Europe
+- physioclimatic parameters for regionalisation of calibration parameters
 
-CWatM Calibration & Regionalisation Workflow
--------------------------------------------
+Calibration:
+- calibration of single basins (initialisation + calibration)
+- regionalisation of calibration parameters to create maps
 
-Time Periods
-------------
-Initialization:          01/01/1979 – 31/12/1983 (5 years)
-Calibration Warm-Up:     01/01/1984 – 31/12/1988 (5 years)
-Calibration:             01/01/1989 – 31/12/1998 (10 years)
-Validation:              01/01/1999 – 31/12/2008 (10 years)
+
+============================================================
+=====                   Preparation                    =====
+============================================================
 
 ------------------------------------------------------------
 Step 0 – Preparation of GRDC Station Files
@@ -25,6 +27,19 @@ Manual corrections may be required if:
 
 Important rule: Only ONE GRDC station may be located in a Hydrobasin for calibration.
 This prevents errors later in Step 3 (Regionalisation).
+
+------------------------------------------------------------
+Step 0 – Preparation of Beck Parameters
+------------------------------------------------------------
+Create maps with physioclimatic parameters, specifically:
+- mean annual precipitation (from MSWX)
+- aridity index; calculated from potential evapotranspiration (from CWatM output) and precipitation
+- surface slope (C-CWatM input maps)
+
+
+============================================================
+=====                   Calibration                    =====
+============================================================
 
 ------------------------------------------------------------
 Step 1 – Initialization
@@ -93,12 +108,16 @@ Run Step3B_regionalisationFiles.ipynb via SLURM (runtime > 8h).
 
 Output:
 Final regionalised calibration parameter maps:
-work/.../Step3_regionalisationFiles/RegCalibrParam_CWatMGrid_[GRDC_filename]_[date]/
+.../Step3_regionalisationFiles/RegCalibrParam_CWatMGrid_[GRDC_filename]_[date]/
 
 Files are named in a format directly readable by CWatM.
 
-------------------------------------------------------------
-End of README
-------------------------------------------------------------
 
-Translated and streamlined by CoPilot ()
+-----------------------------------------------------------
+Time Periods used for Europe / Remo
+-----------------------------------------------------------
+Initialization:          01/01/1979 – 31/12/1983 (5 years)
+Calibration Warm-Up:     01/01/1984 – 31/12/1988 (5 years)
+Calibration:             01/01/1989 – 31/12/1998 (10 years)
+Validation:              01/01/1999 – 31/12/2008 (10 years)
+
